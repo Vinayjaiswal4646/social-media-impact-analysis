@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.linear_model import LinearRegression
 
 #EDA
 print("================================================================================================================")
@@ -98,3 +99,41 @@ plt.xlabel("Affects Academic Performance")
 plt.ylabel("Average Daily Usage (Hours)")
 
 plt.show()
+
+#Correlation ;
+numeric_df = df.select_dtypes(include=['int64', 'float64'])
+corr = numeric_df.corr()
+print(corr)
+
+#Heat Map
+plt.figure()
+sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Matrix Heatmap")
+plt.show()
+
+
+# Objective 3: To analyze the relationship between average daily social media usage and mental health score using Simple Linear Regression.
+
+
+# This analysis applies Simple Linear Regression to examine the relationship between average daily social media usage and mental health score.
+# The objective is to determine whether increased usage has a measurable impact on mental health.
+# Regression analysis helps in identifying trends and predicting the dependent variable based on the independent variable.
+
+X = df[['Avg_Daily_Usage_Hours']]
+y = df['Mental_Health_Score']
+model = LinearRegression()
+model.fit(X, y)
+y_pred = model.predict(X)
+
+
+plt.scatter(X, y, label="Actual Data")
+plt.plot(X, y_pred, color='red', label="Regression Line")
+
+plt.title("Social Media Usage vs Mental Health Score")
+plt.xlabel("Avg Daily Usage (Hours)")
+plt.ylabel("Mental Health Score")
+plt.legend()
+plt.show()
+
+print("Slope:", model.coef_[0])
+print("Intercept:", model.intercept_)
