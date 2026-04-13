@@ -164,3 +164,22 @@ print("P-value:", p_value)
 # suggesting that students who report an impact on their academic performance tend to have considerably higher social media usage.
 
 
+
+
+# Objective 5:
+# To analyze the impact of different social media platforms on mental health score using data visualization techniques.
+
+
+# This analysis examines how mental health scores vary across different social media platforms. 
+# By comparing users based on their most frequently used platform, the aim is to identify whether certain platforms are associated with better
+# or worse mental health outcomes.
+
+plt.figure(figsize=(10,6))
+
+sns.boxplot(x='Most_Used_Platform',y='Mental_Health_Score',data=df)
+plt.xticks(rotation=45)
+plt.title("Mental Health Score by Most Used Platform")
+plt.xlabel("Most Used Platform")
+plt.ylabel("Mental Health Score")
+
+plt.show()
