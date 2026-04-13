@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.linear_model import LinearRegression
-
+from scipy.stats import ttest_ind
 #EDA
 print("================================================================================================================")
 
@@ -137,3 +137,30 @@ plt.show()
 
 print("Slope:", model.coef_[0])
 print("Intercept:", model.intercept_)
+
+
+# Objective 4:
+# To test whether there is a significant difference in average daily social media usage between students whose academic performance is affected and those whose performance is not affected.
+
+# H0 (Null Hypothesis): There is no significant difference in average daily social media usage between students
+#  whose academic performance is affected and those whose performance is not affected.
+# H1 (Alternative Hypothesis): There is a significant difference in average daily social media usage between the two groups.
+
+
+group_yes = df[df['Affects_Academic_Performance'] == 'Yes']['Avg_Daily_Usage_Hours']
+group_no = df[df['Affects_Academic_Performance'] == 'No']['Avg_Daily_Usage_Hours']
+
+
+t_stat, p_value = ttest_ind(group_yes, group_no)
+print("T-statistic:", t_stat)
+print("P-value:", p_value)
+
+# The t-test results show that the p-value is significantly less than 0.05, 
+# indicating a statistically significant difference between the two groups. Therefore,
+#  the null hypothesis is rejected. This implies that there is a significant difference in average daily social media usage between students 
+# whose academic performance is affected and those whose performance is not affected.
+
+# The high t-statistic value further supports the strength of this difference, 
+# suggesting that students who report an impact on their academic performance tend to have considerably higher social media usage.
+
+
