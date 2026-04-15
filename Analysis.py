@@ -183,3 +183,4 @@ plt.xlabel("Most Used Platform")
 plt.ylabel("Mental Health Score")
 
 plt.show()
+
